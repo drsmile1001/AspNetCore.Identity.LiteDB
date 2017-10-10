@@ -1,5 +1,4 @@
-﻿using AspNetCore.Identity.LiteDB.Data;
-using LiteDB;
+﻿using LiteDB;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
@@ -14,10 +13,10 @@ namespace AspNetCore.Identity.LiteDB
         private readonly LiteCollection<TRole> _roles;
         private readonly LiteCollection<CancellationToken> _cancellationTokens;
 
-        public LiteDbRoleStore(LiteDbContext dbContext)
+        public LiteDbRoleStore(LiteDatabase dbContext)
         {
-            _roles = dbContext.LiteDatabase.GetCollection<TRole>("roles");
-            _cancellationTokens = dbContext.LiteDatabase.GetCollection<CancellationToken>("cancellationtokens");
+            _roles = dbContext.GetCollection<TRole>("roles");
+            _cancellationTokens = dbContext.GetCollection<CancellationToken>("cancellationtokens");
         }
 
         public Task SaveChanges(

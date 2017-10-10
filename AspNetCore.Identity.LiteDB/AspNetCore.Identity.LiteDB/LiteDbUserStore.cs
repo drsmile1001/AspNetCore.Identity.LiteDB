@@ -1,5 +1,4 @@
-﻿using AspNetCore.Identity.LiteDB.Data;
-using AspNetCore.Identity.LiteDB.Models;
+﻿using AspNetCore.Identity.LiteDB.Models;
 using LiteDB;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -32,10 +31,10 @@ namespace AspNetCore.Identity.LiteDB
         private readonly LiteCollection<TUser> _users;
         private readonly LiteCollection<CancellationToken> _cancellationTokens;
 
-        public LiteDbUserStore(LiteDbContext dbContext)
+        public LiteDbUserStore(LiteDatabase dbContext)
         {
-            _users = dbContext.LiteDatabase.GetCollection<TUser>("users");
-            _cancellationTokens = dbContext.LiteDatabase.GetCollection<CancellationToken>("cancellationtokens");
+            _users = dbContext.GetCollection<TUser>("users");
+            _cancellationTokens = dbContext.GetCollection<CancellationToken>("cancellationtokens");
         }
 
         public Task SaveChanges(
